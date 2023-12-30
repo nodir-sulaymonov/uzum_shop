@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package auth_v1;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "google/api/validate.proto";
+
+option go_package = "github.com/Shemistan/uzum_shop/pkg/shop1";
+
+service  {
+  rpc GetProduct(GetProduct.Request) returns (GetProduct.Response){
+    option (google.api.http) = {
+      get: "/shop/v1/product"
+    };
+  };
+
+  rpc GetProducts(google.protobuf.Empty) returns (GetProducts.Response){
+    option (google.api.http) = {
+      get: "/shop/v1/products"
+    };
+  };
+
+  rpc AddProduct(AddProduct.Request) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      post: "/shop/v1/basket"
+      body: "*"
+    };
+  };
+
+  rpc UpdateProduct(UpdateProduct.Request ) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      put: "/shop/v1/basket"
+      body: "*"
+    };
+  }
+
+  rpc DeleteProduct(DeleteProduct.Request) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      delete: "/shop/v1/basket"
+    };
+  };
+
+  rpc GetBasket(google.protobuf.Empty) returns (GetBasket.Response){
+    option (google.api.http) = {
+      get: "/shop/v1/basket"
+    };
+  }
+
+  rpc CreateOrder(Order.Request) returns (Order.Response){
+    option (google.api.http) = {
+      post: "/shop/v1/order"
+      body: "*"
+    };
+  }
+
+  rpc CancelOrder(CancelOrder.Request) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      delete: "/shop/v1/order"
+    };
+  };
+
+  rpc Healthz(google.protobuf.Empty) returns (google.protobuf.Empty){
+    option (google.api.http) = {
+      get: "/auth_v1/healthz"
+    };
+  }
+}
+
+
+message Product {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int64 count = 5;
+}
+
+message AddProduct {
+  message Request {
+    int64 product_id = 1;
+    int64 count = 2;
+  }
+}
+
+message ShortProduct = {
+  string name = 1;
+  double price = 3;
+}
+
+message Basket {
+  int64 id = 1;
+  string user_id = 2;
+  int64 product_id = 3;
+  int64 count = 4;
+}
+
+message UpdateBusket {
+  message Request {
+  int64 product_id = 1;
+  int64 count = 2;
+  }
+}
+
+message Order {
+  int64 id = 1;
+  string user_id = 2;
+  uint64 product_id = 3;
+  string address = 4;
+  double coordinate_address_x = 5;
+  double coordinate_address_y = 6;
+  double coordinates_point_x = 7;
+  double coordinates_point_y = 8;
+  string create_at = 9;
+  string start_at = 10;
+  string delivery_at = 11;
+  int64 courier_id = 12;
+  string delivery_status = 13;
+}
