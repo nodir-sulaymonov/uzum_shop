@@ -1,4 +1,4 @@
-package shopV1
+package shop1
 
 import (
 	"context"
@@ -8,13 +8,12 @@ import (
 	"github.com/golang/protobuf/ptypes/empty"
 )
 
-func (serv *Shop) UpdateBasket(ctx context.Context, req *pb.UpdateBasket_Request) (*empty.Empty, error) {
-	updateBask := &models.AddProductToBasketModel{
+func (serv *Shop) DeleteBasket(ctx context.Context, req *pb.DeleteBasket_Request) (*empty.Empty, error) {
+	deleteReq := &models.DeleteFomBasked{
 		ProductId: req.ProductId,
-		Count:     req.Count,
 	}
 
-	err := serv.ShopService.UpdateBasketService(ctx, updateBask)
+	err := serv.ShopService.DeleteBasketService(ctx, deleteReq)
 	if err != nil {
 		return &empty.Empty{}, err
 	}

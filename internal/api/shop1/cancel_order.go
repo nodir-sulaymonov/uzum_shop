@@ -1,4 +1,4 @@
-package shopV1
+package shop1
 
 import (
 	"context"
