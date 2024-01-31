@@ -4,7 +4,7 @@ import (
 	"context"
 	"strconv"
 
-	loginPb "github.com/Shemistan/uzum_shop/pkg/loginV1"
+	loginPb "github.com/Shemistan/uzum_shop/pkg/login_v1"
 	"google.golang.org/grpc/metadata"
 )
 
@@ -16,14 +16,17 @@ func (s *shopSystemService) GetUserIdFromLoginServ(ctx context.Context) (int, er
 		ctx = metadata.NewOutgoingContext(ctx, md)
 	}
 
-	check, err := s.loginClient.Check(ctx, emp)
+	// TODO: get the ID from auth_service
+	// replace _ with the current response
+	_, err := s.loginClient.Check(ctx, emp)
 	if err != nil {
-		return -1, err
+		return 0, err
 	}
 
-	userId, err := strconv.Atoi(check.UserId)
+	// Place the actual ID converted to int
+	userId, err := strconv.Atoi("dasdads")
 	if err != nil {
-		return -1, err
+		return 0, err
 	}
 
 	return userId, nil

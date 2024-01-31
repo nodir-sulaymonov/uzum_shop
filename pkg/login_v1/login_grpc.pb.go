@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -25,7 +26,7 @@ type LoginV1Client interface {
 	Login(ctx context.Context, in *Login_Request, opts ...grpc.CallOption) (*Login_Response, error)
 	GetRefreshToken(ctx context.Context, in *GetRefreshToken_Request, opts ...grpc.CallOption) (*GetRefreshToken_Response, error)
 	GetAccessToken(ctx context.Context, in *GetAccessToken_Request, opts ...grpc.CallOption) (*GetAccessToken_Response, error)
-	Check(ctx context.Context, in *Check_Request, opts ...grpc.CallOption) (*Check_Respond, error)
+	Check(ctx context.Context, in *Check_Request, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type loginV1Client struct {
@@ -38,7 +39,7 @@ func NewLoginV1Client(cc grpc.ClientConnInterface) LoginV1Client {
 
 func (c *loginV1Client) Login(ctx context.Context, in *Login_Request, opts ...grpc.CallOption) (*Login_Response, error) {
 	out := new(Login_Response)
-	err := c.cc.Invoke(ctx, "/login_1.LoginV1/Login", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/login_v1.LoginV1/Login", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +48,7 @@ func (c *loginV1Client) Login(ctx context.Context, in *Login_Request, opts ...gr
 
 func (c *loginV1Client) GetRefreshToken(ctx context.Context, in *GetRefreshToken_Request, opts ...grpc.CallOption) (*GetRefreshToken_Response, error) {
 	out := new(GetRefreshToken_Response)
-	err := c.cc.Invoke(ctx, "/login_1.LoginV1/GetRefreshToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/login_v1.LoginV1/GetRefreshToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,16 +57,16 @@ func (c *loginV1Client) GetRefreshToken(ctx context.Context, in *GetRefreshToken
 
 func (c *loginV1Client) GetAccessToken(ctx context.Context, in *GetAccessToken_Request, opts ...grpc.CallOption) (*GetAccessToken_Response, error) {
 	out := new(GetAccessToken_Response)
-	err := c.cc.Invoke(ctx, "/login_1.LoginV1/GetAccessToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/login_v1.LoginV1/GetAccessToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *loginV1Client) Check(ctx context.Context, in *Check_Request, opts ...grpc.CallOption) (*Check_Respond, error) {
-	out := new(Check_Respond)
-	err := c.cc.Invoke(ctx, "/login_1.LoginV1/Check", in, out, opts...)
+func (c *loginV1Client) Check(ctx context.Context, in *Check_Request, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/login_v1.LoginV1/Check", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -79,7 +80,7 @@ type LoginV1Server interface {
 	Login(context.Context, *Login_Request) (*Login_Response, error)
 	GetRefreshToken(context.Context, *GetRefreshToken_Request) (*GetRefreshToken_Response, error)
 	GetAccessToken(context.Context, *GetAccessToken_Request) (*GetAccessToken_Response, error)
-	Check(context.Context, *Check_Request) (*Check_Respond, error)
+	Check(context.Context, *Check_Request) (*emptypb.Empty, error)
 	mustEmbedUnimplementedLoginV1Server()
 }
 
@@ -96,7 +97,7 @@ func (UnimplementedLoginV1Server) GetRefreshToken(context.Context, *GetRefreshTo
 func (UnimplementedLoginV1Server) GetAccessToken(context.Context, *GetAccessToken_Request) (*GetAccessToken_Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessToken not implemented")
 }
-func (UnimplementedLoginV1Server) Check(context.Context, *Check_Request) (*Check_Respond, error) {
+func (UnimplementedLoginV1Server) Check(context.Context, *Check_Request) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Check not implemented")
 }
 func (UnimplementedLoginV1Server) mustEmbedUnimplementedLoginV1Server() {}
@@ -122,7 +123,7 @@ func _LoginV1_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/login_1.LoginV1/Login",
+		FullMethod: "/login_v1.LoginV1/Login",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LoginV1Server).Login(ctx, req.(*Login_Request))
@@ -140,7 +141,7 @@ func _LoginV1_GetRefreshToken_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/login_1.LoginV1/GetRefreshToken",
+		FullMethod: "/login_v1.LoginV1/GetRefreshToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LoginV1Server).GetRefreshToken(ctx, req.(*GetRefreshToken_Request))
@@ -158,7 +159,7 @@ func _LoginV1_GetAccessToken_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/login_1.LoginV1/GetAccessToken",
+		FullMethod: "/login_v1.LoginV1/GetAccessToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LoginV1Server).GetAccessToken(ctx, req.(*GetAccessToken_Request))
@@ -176,7 +177,7 @@ func _LoginV1_Check_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/login_1.LoginV1/Check",
+		FullMethod: "/login_v1.LoginV1/Check",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LoginV1Server).Check(ctx, req.(*Check_Request))
@@ -188,7 +189,7 @@ func _LoginV1_Check_Handler(srv interface{}, ctx context.Context, dec func(inter
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var LoginV1_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "login_1.LoginV1",
+	ServiceName: "login_v1.LoginV1",
 	HandlerType: (*LoginV1Server)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -3,8 +3,8 @@ package shop1
 import (
 	"context"
 
+	pb "github.com/Shemistan/pkg/shopV1"
 	"github.com/Shemistan/uzum_shop/internal/models"
-	pb "github.com/Shemistan/uzum_shop/pkg/shopV1"
 	"github.com/golang/protobuf/ptypes/empty"
 )
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/Shemistan/uzum_shop/internal/models"
 	repo "github.com/Shemistan/uzum_shop/internal/storage"
-	loginPb "github.com/Shemistan/uzum_shop/pkg/loginV1"
+	loginPb "github.com/Shemistan/uzum_shop/pkg/login_v1"
 )
 
 type IShopSystemService interface {

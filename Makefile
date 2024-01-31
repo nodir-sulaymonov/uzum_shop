@@ -46,3 +46,15 @@ gen_login: ## Генерация proto-файлов
 				--validate_out lang=go:pkg/login_v1 --validate_opt=paths=source_relative \
 				--plugin=protoc-gen-validate=bin/protoc-gen-validate \
 				api/login_v1/*.proto
+mig_up:
+	migrate -database postgres://postgres:postgres@localhost:5432/service?sslmode=disable -path migrations up
+
+mig_down:
+	migrate -database postgres://postgres:postgres@localhost:5432/service?sslmode=disable -path migrations down
+
+create_topic:
+	docker exec -it shopc-kafka-1 kafka-topics --create --bootstrap-server localhost:29092 --topic my_topic --partitions 3 --replication-factor 1
+
+#write message to topic
+write_message:
+	docker exec -it shopc-kafka-1 kafka-console-producer --broker-list localhost:29092 --topic my_topic
